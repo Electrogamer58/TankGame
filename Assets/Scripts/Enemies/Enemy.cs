@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] int _damageAmount = 1;
     [SerializeField] ParticleSystem _impactParticles;
     [SerializeField] AudioClip _impactSound;
+    [SerializeField] AudioClip _DullSound;
 
     Rigidbody _rb;
 
@@ -26,12 +27,22 @@ public class Enemy : MonoBehaviour
         Player player = other.gameObject.GetComponent<Player>();
         if(player != null)
         {
-            PlayerImpact(player);
-            ImpactFeedback();
+            if (!player.isInvincible)
+            {
+                PlayerImpact(player);
+                ImpactFeedback();
+            }
+            else
+            {
+                if (_DullSound != null)
+                {
+                    AudioHelper.PlayClip2D(_DullSound, 1f);
+                }
+            }
         }
     }
 
-    public virtual void PlayerImpact(Player player)
+    protected virtual void PlayerImpact(Player player)
     {
         player.DecreaseHealth(_damageAmount);
     }
