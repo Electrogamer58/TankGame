@@ -686,6 +686,7 @@ MonoBehaviour:
   _playerTransform: {fileID: 732590194}
   _viewRange: {fileID: 1383615083}
   _bossHead: {fileID: 1918254401}
+  attackDamage: 10
 --- !u!95 &459373755
 Animator:
   serializedVersion: 3
@@ -1646,7 +1647,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383615082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.51, y: 1.14, z: 0.00000047684}
+  m_LocalPosition: {x: 0.17, y: 1.14, z: 0.00000047684}
   m_LocalScale: {x: 21.528727, y: 1, z: 18.673195}
   m_Children: []
   m_Father: {fileID: 459373752}
