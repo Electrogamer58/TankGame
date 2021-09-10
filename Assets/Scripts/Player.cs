@@ -34,17 +34,17 @@ public class Player : MonoBehaviour
 
     public void DecreaseHealth(int amount)
     {
-            _currentHealth -= amount;
-            Debug.Log("Player's health: " + _currentHealth);
-            if (_currentHealth <= 0)
-            {
-                Kill();
-            } 
+        _currentHealth -= amount;
+        Debug.Log("Player's health: " + _currentHealth);
+        if (_currentHealth <= 0)
+         {
+            Kill();
+         } 
     }
 
     public void Kill()
     {
-            gameObject.SetActive(false);
+       gameObject.SetActive(false);
             //TODO
             //Play Particles
             //Play sounds

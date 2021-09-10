@@ -5,19 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int _damageAmount = 1;
+    [SerializeField] protected int _damageAmount = 1;
+    [SerializeField] float _health = 10;
     [SerializeField] ParticleSystem _impactParticles;
     [SerializeField] AudioClip _impactSound;
-    [SerializeField] AudioClip _DullSound;
+    [SerializeField] protected AudioClip _DullSound;
 
     Rigidbody _rb;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         Move();
     }
@@ -47,7 +48,7 @@ public class Enemy : MonoBehaviour
         player.DecreaseHealth(_damageAmount);
     }
 
-    private void ImpactFeedback()
+    protected void ImpactFeedback()
     {
         //particles
         if(_impactParticles != null)
@@ -62,6 +63,11 @@ public class Enemy : MonoBehaviour
         {
             AudioHelper.PlayClip2D(_impactSound, 1f);
         }
+    }
+
+    protected void DecreaseEnemyHealth(float amount)
+    {
+        _health -= amount;
     }
 
     public void Move()
