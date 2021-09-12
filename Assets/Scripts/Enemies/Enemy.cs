@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected int _damageAmount = 1;
-    [SerializeField] float _health = 10;
+    [SerializeField] protected float _health = 10;
     [SerializeField] ParticleSystem _impactParticles;
     [SerializeField] AudioClip _impactSound;
     [SerializeField] protected AudioClip _DullSound;
@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected void DecreaseEnemyHealth(float amount)
+    public void DecreaseEnemyHealth(float amount)
     {
         _health -= amount;
     }

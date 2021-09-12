@@ -7,6 +7,13 @@ public class TankController : MonoBehaviour
     [SerializeField] float _moveSpeed = .25f;
     [SerializeField] float _turnSpeed = 2f;
 
+    [Header("Bullets and Access")]
+    [SerializeField] Rigidbody _regularBullet;
+    [SerializeField] GameObject _missile;
+    [SerializeField] GameObject _mine;
+
+    private Transform _barrelEnd;
+
     public float MaxSpeed
     {
         get => _moveSpeed;
@@ -18,12 +25,21 @@ public class TankController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _barrelEnd = GameObject.Find("BarrelEnd").transform;
     }
 
     private void FixedUpdate()
     {
         MoveTank();
         TurnTank();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ShootBullet();
+        }
     }
 
     public void MoveTank()
@@ -45,5 +61,12 @@ public class TankController : MonoBehaviour
         Quaternion turnOffset = Quaternion.Euler(0, turnAmountThisFrame, 0);
         // apply quaternion to the rigidbody
         _rb.MoveRotation(_rb.rotation * turnOffset);
+    }
+
+    public void ShootBullet()
+    {
+        _regularBullet.gameObject.SetActive(true);
+        _regularBullet = Instantiate(_regularBullet, _barrelEnd.position, Quaternion.identity);
+        _regularBullet.velocity = transform.forward * _regularBullet.GetComponent<ProjectileBase>().moveSpeed;
     }
 }

@@ -6,6 +6,7 @@ public class Boss_Run : StateMachineBehaviour
 {
     [SerializeField] float _moveSpeed = 2.5f;
     [SerializeField] float _attackRange = 5f;
+    [SerializeField] float _gemAttackRange = 10f;
     Transform _player;
     ViewRange _viewRange;
     Rigidbody _rb;
@@ -25,23 +26,36 @@ public class Boss_Run : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _boss.LookAtPlayer();
-
-        Vector3 _target = new Vector3(_player.position.x, _rb.position.y, _player.position.z);
-        Vector3 _newPos = Vector3.MoveTowards(_rb.position, _target, _moveSpeed * Time.fixedDeltaTime);
-
-        if (_viewRange.seePlayer == true)
+        if (_player != null)
         {
-            _rb.MovePosition(_newPos);
-        }
+            Vector3 _target = new Vector3(_player.position.x, _rb.position.y, _player.position.z);
+            Vector3 _newPos = Vector3.MoveTowards(_rb.position, _target, _moveSpeed * Time.fixedDeltaTime);
 
-        if (_viewRange.seePlayer == false)
-        {
-            animator.SetBool("seesPlayer", false);
-        }
 
-        if (Vector3.Distance(_player.position, _rb.position) <= _attackRange)
-        {
-            animator.SetTrigger("Attack");
+            if (_viewRange.seePlayer == true)
+            {
+                _rb.MovePosition(_newPos);
+            }
+
+            if (_viewRange.seePlayer == false)
+            {
+                animator.SetBool("seesPlayer", false);
+            }
+
+            if (Vector3.Distance(_player.position, _rb.position) <= _attackRange)
+            {
+                animator.SetTrigger("Attack");
+            }
+            else if (Vector3.Distance(_player.position, _rb.position) > _attackRange)
+            {
+                if ((Vector3.Distance(_player.position, _rb.position) <= _gemAttackRange))
+                {
+                    animator.SetBool("seesPlayer", false);
+                    animator.SetTrigger("Special Attack");
+                    animator.SetBool("seesPlayer", true);
+                }
+                
+            }
         }
     }
 
