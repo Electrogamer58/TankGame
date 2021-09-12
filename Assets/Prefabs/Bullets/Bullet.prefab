@@ -107,8 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 290d11c9414275f4fa0208c94badb42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactParticles: {fileID: 0}
-  _impactSound: {fileID: 0}
+  _impactParticles: {fileID: 8228544104131028227, guid: c97aa8ebd8949ad4d998dc0e412f6569,
+    type: 3}
+  _impactSound: {fileID: 8300000, guid: ccfce8546283792449243ecbe9a6ffed, type: 3}
   _player: {fileID: 0}
   moveSpeed: 15
   bulletDamage: 5

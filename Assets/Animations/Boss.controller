@@ -84,9 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cd25ee0996b5e4d866df38f5cde300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 15
-  _attackRange: 8
-  _gemAttackRange: 20
+  _moveSpeed: 0.1
+  _attackRange: 5
+  _gemAttackRange: 15
 --- !u!114 &-1543249433146330338
 MonoBehaviour:
   m_ObjectHideFlags: 1

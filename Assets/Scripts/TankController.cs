@@ -6,6 +6,8 @@ public class TankController : MonoBehaviour
 {
     [SerializeField] float _moveSpeed = .25f;
     [SerializeField] float _turnSpeed = 2f;
+    [SerializeField] ParticleSystem _muzzleFlash;
+    [SerializeField] AudioClip _muzzleSound;
 
     [Header("Bullets and Access")]
     [SerializeField] Rigidbody _regularBullet;
@@ -65,8 +67,12 @@ public class TankController : MonoBehaviour
 
     public void ShootBullet()
     {
+        _muzzleFlash.Play();
+        AudioHelper.PlayClip2D(_muzzleSound, 1f);
+
         _regularBullet.gameObject.SetActive(true);
         _regularBullet = Instantiate(_regularBullet, _barrelEnd.position, Quaternion.identity);
+        _rb.AddForce(-transform.forward * 300f);
         _regularBullet.velocity = transform.forward * _regularBullet.GetComponent<ProjectileBase>().moveSpeed;
     }
 }

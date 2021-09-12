@@ -29,12 +29,13 @@ public class Boss_Run : StateMachineBehaviour
         if (_player != null)
         {
             Vector3 _target = new Vector3(_player.position.x, _rb.position.y, _player.position.z);
-            Vector3 _newPos = Vector3.MoveTowards(_rb.position, _target, _moveSpeed * Time.fixedDeltaTime);
-
+            Vector3 _newPos = Vector3.MoveTowards(_rb.position, _target, _moveSpeed);
 
             if (_viewRange.seePlayer == true)
             {
+               
                 _rb.MovePosition(_newPos);
+
             }
 
             if (_viewRange.seePlayer == false)

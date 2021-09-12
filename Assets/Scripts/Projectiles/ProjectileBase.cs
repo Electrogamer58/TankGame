@@ -46,9 +46,10 @@ public class ProjectileBase : MonoBehaviour
         if (_enemy != null)
         {
             _enemy.DecreaseEnemyHealth(bulletDamage);
-            gameObject.SetActive(false);
+            
         }
-        
+        DelayHelper.DelayAction(this, DeactivateObject, 0.01f);
+
     }
 
     protected void ImpactFeedback()
