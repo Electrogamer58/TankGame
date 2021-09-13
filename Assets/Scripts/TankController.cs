@@ -78,7 +78,7 @@ public class TankController : MonoBehaviour
 
         _regularBullet.gameObject.SetActive(true);
         _regularBullet = Instantiate(_regularBullet, _barrelEnd.position, Quaternion.identity);
-        _rb.AddForce(-transform.forward * 300f);
+        _rb.AddForce(-transform.forward * 350f);
         _regularBullet.velocity = transform.forward * _regularBullet.GetComponent<ProjectileBase>().moveSpeed;
     }
 

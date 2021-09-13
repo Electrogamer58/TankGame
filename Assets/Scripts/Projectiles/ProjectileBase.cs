@@ -16,7 +16,7 @@ public class ProjectileBase : MonoBehaviour
     
     Vector3 moveDirection;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         _player =  GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         _rb = GetComponent<Rigidbody>();
