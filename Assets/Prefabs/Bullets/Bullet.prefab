@@ -111,7 +111,7 @@ MonoBehaviour:
     type: 3}
   _impactSound: {fileID: 8300000, guid: ccfce8546283792449243ecbe9a6ffed, type: 3}
   _player: {fileID: 0}
-  moveSpeed: 15
+  moveSpeed: 25
   bulletDamage: 5
   _rb: {fileID: 0}
 --- !u!54 &7444889895985747098

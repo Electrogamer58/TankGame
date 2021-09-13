@@ -93,7 +93,7 @@ public abstract class PowerUpBase : MonoBehaviour
         PowerDown(player);
         Debug.Log("Coroutine ended");
         yield return new WaitForSeconds(1);
-        gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 
     private IEnumerator BossPowerDuration(int waitTime)

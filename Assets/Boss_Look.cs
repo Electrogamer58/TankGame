@@ -35,7 +35,7 @@ public class Boss_Look : StateMachineBehaviour
             //_boss.LookAtPowerup();
             if (_upgrade != null && _boss.hasPowerup == false)
             {
-                Vector3 _target = new Vector3(_upgrade.position.x, _rb.position.y, _upgrade.position.z);
+                Vector3 _target = new Vector3(_upgrade.position.x, 0.38f, _upgrade.position.z);
                 Vector3 _newPos = Vector3.MoveTowards(_rb.position, _target, _moveSpeed);
 
 

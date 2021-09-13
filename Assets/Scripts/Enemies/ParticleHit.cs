@@ -31,7 +31,7 @@ public class ParticleHit : MonoBehaviour
                 StartCoroutine(SlowDown());
                 _player.DecreaseHealth(_damageAmount);
                 ImpactFeedback(_impactSound);
-                _player.GetComponent<Rigidbody>().AddExplosionForce(_damageAmount, _player.transform.position, 2);
+                //_player.GetComponent<Rigidbody>().AddExplosionForce(_damageAmount, _player.transform.position, 2);
                 Debug.Log("Particle Hit Player");
             }
             else if (_player.isInvincible)

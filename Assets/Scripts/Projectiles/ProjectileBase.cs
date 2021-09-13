@@ -8,7 +8,7 @@ public class ProjectileBase : MonoBehaviour
     [SerializeField] GameObject _impactParticles;
     [SerializeField] AudioClip _impactSound;
     [SerializeField] Player _player;
-    public float moveSpeed = 10;
+    public float moveSpeed = 20;
     public float bulletDamage;
 
     [SerializeField] public Rigidbody _rb;
