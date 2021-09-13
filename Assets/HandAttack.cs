@@ -8,7 +8,7 @@ public class HandAttack : Enemy
     {
         base.Awake();
         Boss boss = gameObject.GetComponentInParent<Boss>();
-        _damageAmount = boss.attackDamage;
+        _damageAmount = boss.attackDamage/2;
     }
 
     private void OnTriggerEnter(Collider other)

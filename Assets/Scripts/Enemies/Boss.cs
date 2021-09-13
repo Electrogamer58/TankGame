@@ -18,26 +18,52 @@ public class Boss : Enemy
     [SerializeField] ParticleSystem _deathParticles;
     [SerializeField] AudioClip _deathSound;
 
+    [Header("Movement")]
+    [SerializeField] Transform _rageUpgrade;
+
+    private float nextActionTime = 0.0f;
+    public float period = 5f;
+
+    public bool hasPowerup = false;
+    public int moveRoll = 1;
+
 
 
     protected override void Awake()
     {
         base.Awake();
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        _rageUpgrade = GameObject.FindGameObjectWithTag("Rage").transform;
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+
         if (_playerTransform != null)
         {
             LookAtPlayer();
         }
+
+        
+
     }
 
     private void Update()
     {
-        Explode();
+        
+        DieIfDead();
+        if (Time.time > nextActionTime)
+        {
+            DelayHelper.DelayAction(this, RollForMovement, 1);
+            nextActionTime += period;
+            // execute block of code here
+        }
+
+        Vector3 _target = new Vector3(_rb.position.x, 0.36f, _rb.position.z);
+        Vector3 _newPos = Vector3.MoveTowards(_rb.position, _target, 100f);
+
+        _rb.MovePosition(_newPos);
     }
 
     public void LookAtPlayer()
@@ -50,7 +76,12 @@ public class Boss : Enemy
         }
     }
 
-    private void Explode()
+    public void LookAtPowerup()
+    {
+        transform.LookAt(_rageUpgrade);
+    }
+
+    private void DieIfDead()
     {
         if (_health <= 0)
         {
@@ -83,5 +114,10 @@ public class Boss : Enemy
         {
             AudioHelper.PlayClip2D(_deathSound, 1f);
         }
+    }
+
+    public void RollForMovement()
+    {
+        moveRoll = Random.Range(1, 3);
     }
 }

@@ -6,6 +6,7 @@ public class TankController : MonoBehaviour
 {
     [SerializeField] float _moveSpeed = .25f;
     [SerializeField] float _turnSpeed = 2f;
+    [SerializeField] public float _recharge = 2f;
     [SerializeField] ParticleSystem _muzzleFlash;
     [SerializeField] AudioClip _muzzleSound;
 
@@ -15,6 +16,8 @@ public class TankController : MonoBehaviour
     [SerializeField] GameObject _mine;
 
     private Transform _barrelEnd;
+    private bool _shotAllowed = true;
+    public float _ogRecharge;
 
     public float MaxSpeed
     {
@@ -28,6 +31,7 @@ public class TankController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _barrelEnd = GameObject.Find("BarrelEnd").transform;
+        _ogRecharge = _recharge;
     }
 
     private void FixedUpdate()
@@ -38,8 +42,10 @@ public class TankController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _shotAllowed)
         {
+            _shotAllowed = false;
+            DelayHelper.DelayAction(this, ShotBoolChange, _recharge);
             ShootBullet();
         }
     }
@@ -74,5 +80,10 @@ public class TankController : MonoBehaviour
         _regularBullet = Instantiate(_regularBullet, _barrelEnd.position, Quaternion.identity);
         _rb.AddForce(-transform.forward * 300f);
         _regularBullet.velocity = transform.forward * _regularBullet.GetComponent<ProjectileBase>().moveSpeed;
+    }
+
+    public void ShotBoolChange()
+    {
+        _shotAllowed = true;
     }
 }

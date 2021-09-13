@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioClip _impactSound;
     [SerializeField] protected AudioClip _DullSound;
 
-    Rigidbody _rb;
+    protected Rigidbody _rb;
 
     protected virtual void Awake()
     {

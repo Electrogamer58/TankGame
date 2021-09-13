@@ -9,6 +9,10 @@ public abstract class PowerUpBase : MonoBehaviour
 
     protected abstract void PowerDown(Player player);
 
+    protected abstract void BossPowerUp(Boss boss);
+
+    protected abstract void BossPowerDown(Boss boss);
+
     [SerializeField] float _movementSpeed = 1;
     protected float MovementSpeed => _movementSpeed;
 
@@ -18,6 +22,7 @@ public abstract class PowerUpBase : MonoBehaviour
     [SerializeField] AudioClip _collectSound;
 
     private Player player;
+    private Boss boss;
 
     protected Rigidbody _rb;
 
@@ -41,7 +46,8 @@ public abstract class PowerUpBase : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         player = other.gameObject.GetComponent<Player>();
-        if (player != null)
+        boss = other.gameObject.GetComponent<Boss>();
+        if (player != null && boss == null)
         {
             PowerUp(player);
             //spawn particles and sfx bc we need to disable object
@@ -49,9 +55,20 @@ public abstract class PowerUpBase : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
 
-            powDur = PowerDuration(_powerupDuration);
+            powDur = PlayerPowerDuration(_powerupDuration);
+            StartCoroutine(powDur); 
+        }
+
+        if (player == null && boss != null)
+        {
+            BossPowerUp(boss);
+            //spawn particles and sfx bc we need to disable object
+            Feedback();
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
+
+            powDur = BossPowerDuration(_powerupDuration);
             StartCoroutine(powDur);
-            
         }
     }
 
@@ -69,7 +86,7 @@ public abstract class PowerUpBase : MonoBehaviour
         }
     }
 
-    private IEnumerator PowerDuration(int waitTime)
+    private IEnumerator PlayerPowerDuration(int waitTime)
     {
         Debug.Log("Coroutine started");
         yield return new WaitForSeconds(waitTime);
@@ -77,6 +94,16 @@ public abstract class PowerUpBase : MonoBehaviour
         Debug.Log("Coroutine ended");
         yield return new WaitForSeconds(1);
         gameObject.SetActive(false);
+    }
+
+    private IEnumerator BossPowerDuration(int waitTime)
+    {
+        Debug.Log("Coroutine started");
+        yield return new WaitForSeconds(waitTime);
+        BossPowerDown(boss);
+        Debug.Log("Coroutine ended");
+        yield return new WaitForSeconds(1);
+        Destroy(this.gameObject);
     }
 
 

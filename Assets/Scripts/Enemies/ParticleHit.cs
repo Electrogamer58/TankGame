@@ -16,6 +16,7 @@ public class ParticleHit : MonoBehaviour
     private void Awake()
     {
         _boss = GetComponentInParent<Boss>();
+        _damageAmount = _boss.attackDamage;
     }
 
     private void OnParticleCollision(GameObject other)

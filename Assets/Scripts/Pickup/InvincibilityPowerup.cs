@@ -38,4 +38,14 @@ public class InvincibilityPowerup : PowerUpBase
 
         player.isInvincible = false;
     }
+
+    protected override void BossPowerUp(Boss boss)
+    {
+
+    }
+
+    protected override void BossPowerDown(Boss boss)
+    {
+
+    }
 }
