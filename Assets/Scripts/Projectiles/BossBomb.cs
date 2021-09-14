@@ -49,6 +49,7 @@ public class BossBomb : ProjectileBase
 
     private void SpawnZombie()
     {
+        _zombie.SetActive(true);
         _zombie = Instantiate(_zombie, gameObject.transform.position, Quaternion.identity);
         Debug.Log("Spawned a Zombie");
     }

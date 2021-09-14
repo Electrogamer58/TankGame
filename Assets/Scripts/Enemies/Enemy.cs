@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
             _impactParticles = Instantiate(_impactParticles, transform.position, Quaternion.identity);
             //ParticleSystem parts = _impactParticles.GetComponent<ParticleSystem>();
             //float totalDuration = parts.duration + parts.startLifetime;
-            //Destroy(_impactParticles, totalDuration);
+            Destroy(_impactParticles, 10);
         }
         // audio. TODO: Consider object pooling - helps performance
         if (_impactSound != null)
