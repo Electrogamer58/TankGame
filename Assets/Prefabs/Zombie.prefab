@@ -93,9 +93,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
-  m_Height: 2
+  m_Height: 3.0982094
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.000000048975895, y: 0.5491042, z: -0.00000009795179}
 --- !u!54 &2056239440426607576
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 32
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &2056239440426607577
 MonoBehaviour:
@@ -125,10 +125,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount: 1
-  _health: 10
+  _health: 1
   _impactParticles: {fileID: 5414885691203671606, guid: ebaaf9d80144d9c4d9db1a6768cc4f2b,
     type: 3}
   _impactSound: {fileID: 8300000, guid: 420e659d76e5536488e65ad7174c949f, type: 3}
   _DullSound: {fileID: 8300000, guid: bcfe6e2bce765344e9e9706dff6ac8f8, type: 3}
   _player: {fileID: 0}
-  moveSpeed: 0.1
+  moveSpeed: 0.05

@@ -12,8 +12,10 @@ public class TankController : MonoBehaviour
 
     [Header("Bullets and Access")]
     [SerializeField] Rigidbody _regularBullet;
-    [SerializeField] GameObject _missile;
+    [SerializeField] Rigidbody _missile;
     [SerializeField] GameObject _mine;
+    public bool onRegular = true;
+    public bool onMissile;
 
     private Transform _barrelEnd;
     private bool _shotAllowed = true;
@@ -32,6 +34,8 @@ public class TankController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _barrelEnd = GameObject.Find("BarrelEnd").transform;
         _ogRecharge = _recharge;
+
+        onMissile = !onRegular;
     }
 
     private void FixedUpdate()
@@ -47,6 +51,11 @@ public class TankController : MonoBehaviour
             _shotAllowed = false;
             DelayHelper.DelayAction(this, ShotBoolChange, _recharge);
             ShootBullet();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            onMissile = !onMissile;
         }
     }
 
@@ -76,10 +85,22 @@ public class TankController : MonoBehaviour
         _muzzleFlash.Play();
         AudioHelper.PlayClip2D(_muzzleSound, 1f);
 
-        _regularBullet.gameObject.SetActive(true);
-        _regularBullet = Instantiate(_regularBullet, _barrelEnd.position, Quaternion.identity);
-        _rb.AddForce(-transform.forward * 350f);
-        _regularBullet.velocity = transform.forward * _regularBullet.GetComponent<ProjectileBase>().moveSpeed;
+        if (!onMissile)
+        {
+            _regularBullet.gameObject.SetActive(true);
+            _regularBullet = Instantiate(_regularBullet, _barrelEnd.position, Quaternion.identity);
+            _rb.AddForce(-transform.forward * 350f);
+            _regularBullet.velocity = transform.forward * _regularBullet.GetComponent<ProjectileBase>().moveSpeed;
+        }
+
+        if (onMissile)
+        {
+            _missile.gameObject.SetActive(true);
+            _missile = Instantiate(_missile, _barrelEnd.position, Quaternion.identity);
+            _rb.AddForce(-transform.forward * 450f);
+            _missile.velocity = transform.forward * (_regularBullet.GetComponent<ProjectileBase>().moveSpeed/2);
+        }
+        
     }
 
     public void ShotBoolChange()

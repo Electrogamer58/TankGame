@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c164dcb4a9065443baebd241134cfb2, type: 2}
+  - {fileID: 2100000, guid: b595e7feba97bbf46b306bea1e60baba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,10 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33da70f1bbe17c49b9b5e76eb8c6837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactParticles: {fileID: 0}
-  _impactSound: {fileID: 0}
+  _impactParticles: {fileID: 8228544104131028227, guid: c97aa8ebd8949ad4d998dc0e412f6569,
+    type: 3}
+  _impactSound: {fileID: 8300000, guid: 420e659d76e5536488e65ad7174c949f, type: 3}
   _player: {fileID: 0}
-  moveSpeed: 8
-  bulletDamage: 2
+  moveSpeed: 0.5
+  bulletDamage: 4
   _rb: {fileID: 6347593343058131619}
   _boss: {fileID: 0}

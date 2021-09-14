@@ -67,10 +67,13 @@ public class ProjectileBase : MonoBehaviour
         {
             AudioHelper.PlayClip2D(_feedback, 1f);
         }
+
+        transform.position = new Vector3(transform.position.x, -100, transform.position.z);
     }
 
-    protected void DeactivateObject()
+    protected virtual void DeactivateObject()
     {
         gameObject.SetActive(false);
+        
     }
 }
