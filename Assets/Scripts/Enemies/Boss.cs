@@ -18,6 +18,12 @@ public class Boss : Enemy
     [SerializeField] ParticleSystem _deathParticles;
     [SerializeField] AudioClip _deathSound;
 
+    [Header("Bomb Options")]
+    [SerializeField] GameObject _bomb;
+    [SerializeField] Rigidbody _bombRB;
+    [SerializeField] Transform _bombSource;
+    public bool _throwBomb;
+
     [Header("Movement")]
     [SerializeField] Transform _rageUpgrade;
 
@@ -32,6 +38,8 @@ public class Boss : Enemy
     protected override void Awake()
     {
         base.Awake();
+        _throwBomb = false;
+        _bombRB = _bomb.GetComponent<Rigidbody>();
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _rageUpgrade = GameObject.FindGameObjectWithTag("Rage").transform;
     }
@@ -119,5 +127,18 @@ public class Boss : Enemy
     public void RollForMovement()
     {
         moveRoll = Random.Range(1, 3);
+    }
+
+    public void ThrowBomb()
+    {
+        
+            LookAtPlayer();
+            Debug.Log("Spawn Bomb");
+            _bombRB.gameObject.SetActive(true);
+            _bombRB = Instantiate(_bombRB, _bombSource.position, Quaternion.identity);
+            _bombRB.velocity = transform.forward * _bombRB.GetComponent<ProjectileBase>().moveSpeed;
+            _rb.AddForce(-transform.forward * 500f);
+            
+        
     }
 }

@@ -6,10 +6,10 @@ using UnityEngine;
 public class ProjectileBase : MonoBehaviour
 {
     [SerializeField] GameObject _impactParticles;
-    [SerializeField] AudioClip _impactSound;
-    [SerializeField] Player _player;
+    [SerializeField] protected AudioClip _impactSound;
+    [SerializeField] protected Player _player;
     public float moveSpeed = 20;
-    public float bulletDamage;
+    public int bulletDamage;
 
     [SerializeField] public Rigidbody _rb;
 
@@ -23,7 +23,7 @@ public class ProjectileBase : MonoBehaviour
 
     }
 
-    protected void Start()
+    protected virtual void Start()
     {
         // apply vector to the rigidbody
         _rb.useGravity = false;
@@ -38,10 +38,10 @@ public class ProjectileBase : MonoBehaviour
         //_rb.MovePosition(_rb.position + moveOffset);
     //
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         //play impact
-        ImpactFeedback();
+        ImpactFeedback(_impactSound);
         Enemy _enemy = collision.collider.GetComponent<Enemy>();
         if (_enemy != null)
         {
@@ -52,7 +52,7 @@ public class ProjectileBase : MonoBehaviour
 
     }
 
-    protected void ImpactFeedback()
+    protected void ImpactFeedback(AudioClip _feedback)
     {
         //particles
         if (_impactParticles != null)
@@ -65,11 +65,11 @@ public class ProjectileBase : MonoBehaviour
         // audio. TODO: Consider object pooling - helps performance
         if (_impactSound != null)
         {
-            AudioHelper.PlayClip2D(_impactSound, 1f);
+            AudioHelper.PlayClip2D(_feedback, 1f);
         }
     }
 
-    private void DeactivateObject()
+    protected void DeactivateObject()
     {
         gameObject.SetActive(false);
     }
