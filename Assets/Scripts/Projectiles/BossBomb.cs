@@ -17,22 +17,25 @@ public class BossBomb : ProjectileBase
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.GetComponent<IDamageableInterface>())
         {
-            _player = collision.gameObject.GetComponent<Player>();
-            _tank = _player.GetComponent<TankController>();
-            
-            if (!_player.isInvincible) //if vincible and hit, deal damage
+            if (collision.gameObject.tag == "Player")
             {
-                
-                _player.DecreaseHealth(bulletDamage);
-                ImpactFeedback(_impactSound);
-                //_player.GetComponent<Rigidbody>().AddExplosionForce(_damageAmount, _player.transform.position, 2);
-                Debug.Log("Bomb");
-            }
-            else if (_player.isInvincible) //else, just explode but dont deal damage
-            {
-                ImpactFeedback(_dullSound);
+                _player = collision.gameObject.GetComponent<Player>();
+                _tank = _player.GetComponent<TankController>();
+
+                if (!_player.isInvincible) //if vincible and hit, deal damage
+                {
+
+                    _player.DecreaseHealth(bulletDamage);
+                    ImpactFeedback(_impactSound);
+                    //_player.GetComponent<Rigidbody>().AddExplosionForce(_damageAmount, _player.transform.position, 2);
+                    Debug.Log("Bomb");
+                }
+                else if (_player.isInvincible) //else, just explode but dont deal damage
+                {
+                    ImpactFeedback(_dullSound);
+                }
             }
         }
         //if it misses, spawn a zombie

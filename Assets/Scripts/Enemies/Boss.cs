@@ -42,6 +42,7 @@ public class Boss : Enemy
         _bombRB = _bomb.GetComponent<Rigidbody>();
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _rageUpgrade = GameObject.FindGameObjectWithTag("Rage").transform;
+        _health = GetComponent<Health>()._currentHealth;
     }
 
     protected override void FixedUpdate()
@@ -60,7 +61,7 @@ public class Boss : Enemy
     private void Update()
     {
         
-        DieIfDead();
+        DropIfDead();
         if (Time.time > nextActionTime)
         {
             DelayHelper.DelayAction(this, RollForMovement, 1);
@@ -68,10 +69,10 @@ public class Boss : Enemy
             // execute block of code here
         }
 
-        Vector3 _target = new Vector3(_rb.position.x, 0.36f, _rb.position.z);
-        Vector3 _newPos = Vector3.MoveTowards(_rb.position, _target, 100f);
+        //Vector3 _target = new Vector3(_rb.position.x, 0.36f, _rb.position.z);
+        //Vector3 _newPos = Vector3.MoveTowards(_rb.position, _target, 100f);
 
-        _rb.MovePosition(_newPos);
+        //_rb.MovePosition(_newPos);
     }
 
     public void LookAtPlayer()
@@ -89,7 +90,7 @@ public class Boss : Enemy
         transform.LookAt(_rageUpgrade);
     }
 
-    private void DieIfDead()
+    private void DropIfDead()
     {
         if (_health <= 0)
         {
@@ -100,29 +101,24 @@ public class Boss : Enemy
                 _drop = Instantiate(_drop, _v3, Quaternion.identity);
                 _dropAmount -= 1;
 
-                if (_dropAmount == 0)
-                {
-                    ExplosionFeedback();
-                    gameObject.SetActive(false);
-                }
             }  
         }      
     }
 
-    protected void ExplosionFeedback()
-    {
+    //protected void ExplosionFeedback()
+    //{
         
-        if (_deathParticles != null)
-        {
-            _deathParticles = Instantiate(_deathParticles, transform.position, Quaternion.identity);
+        //if (_deathParticles != null)
+        //{
+            //_deathParticles = Instantiate(_deathParticles, transform.position, Quaternion.identity);
             
-        }
+        //}
         
-        if (_deathSound != null)
-        {
-            AudioHelper.PlayClip2D(_deathSound, 1f);
-        }
-    }
+        //if (_deathSound != null)
+        //{
+            //AudioHelper.PlayClip2D(_deathSound, 1f);
+        //}
+    //}
 
     public void RollForMovement()
     {

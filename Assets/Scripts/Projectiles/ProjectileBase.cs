@@ -40,15 +40,15 @@ public class ProjectileBase : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        //play impact
-        ImpactFeedback(_impactSound);
-        Enemy _enemy = collision.collider.GetComponent<Enemy>();
-        if (_enemy != null)
+        if (collision.gameObject.GetComponent<IDamageableInterface>())
         {
-            _enemy.DecreaseEnemyHealth(bulletDamage);
+            //play impact
+            ImpactFeedback(_impactSound);
+            collision.gameObject.GetComponent<IDamageableInterface>().TakeDamage(bulletDamage);
             
+            DelayHelper.DelayAction(this, DeactivateObject, 0.01f);
         }
-        DelayHelper.DelayAction(this, DeactivateObject, 0.01f);
+        
 
     }
 
@@ -58,9 +58,7 @@ public class ProjectileBase : MonoBehaviour
         if (_impactParticles != null)
         {
             _impactParticles = Instantiate(_impactParticles, transform.position, Quaternion.identity);
-            //ParticleSystem parts = _impactParticles.GetComponent<ParticleSystem>();
-            //float totalDuration = parts.duration + parts.startLifetime;
-            //Destroy(_impactParticles, totalDuration);
+            
         }
         // audio. TODO: Consider object pooling - helps performance
         if (_impactSound != null)
