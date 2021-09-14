@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2056239440426607583}
   - component: {fileID: 2056239440426607576}
   - component: {fileID: 2056239440426607577}
+  - component: {fileID: 618706088}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -125,10 +126,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount: 1
-  _health: 1
   _impactParticles: {fileID: 5414885691203671606, guid: ebaaf9d80144d9c4d9db1a6768cc4f2b,
     type: 3}
   _impactSound: {fileID: 8300000, guid: 420e659d76e5536488e65ad7174c949f, type: 3}
   _DullSound: {fileID: 8300000, guid: bcfe6e2bce765344e9e9706dff6ac8f8, type: 3}
   _player: {fileID: 0}
   moveSpeed: 0.05
+--- !u!114 &618706088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056239440426607578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ab39a005d7f044cab64ca787896ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 618706088}
+  _impactParticles: {fileID: 5414885691203671606, guid: ebaaf9d80144d9c4d9db1a6768cc4f2b,
+    type: 3}
+  _impactSound: {fileID: 8300000, guid: ccfce8546283792449243ecbe9a6ffed, type: 3}
+  _dropSomething: 1
+  _objectToDrop: {fileID: 4899237492771995553, guid: 86cab3ad20987ff4881977df4e87bf77,
+    type: 3}
+  _dropAmount: 1
+  _allowDestroy: 1
+  _maxHealth: 2
+  _currentHealth: 0
+  _killDelay: 0
+  _heal: 0

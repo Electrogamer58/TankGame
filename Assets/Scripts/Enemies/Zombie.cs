@@ -20,9 +20,13 @@ public class Zombie : Enemy
 
     private void Update()
     {
-        _target = new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z);
-        _newPos = Vector3.MoveTowards(_rb.position, _target, moveSpeed);
-        _rb.MovePosition(_newPos);
+        if(_player != null)
+        {
+            _target = new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z);
+            _newPos = Vector3.MoveTowards(_rb.position, _target, moveSpeed);
+            _rb.MovePosition(_newPos);
+        }
+        
     }
 
     protected override void PlayerImpact(Player player)
@@ -31,7 +35,7 @@ public class Zombie : Enemy
         ImpactFeedback();
         player.GetComponent<Rigidbody>().AddExplosionForce(800f, gameObject.transform.position, 10f);
         this.gameObject.SetActive(false);
-        Destroy(this.gameObject, 30f);
+        //Destroy(this.gameObject, 30f);
     }
 
    

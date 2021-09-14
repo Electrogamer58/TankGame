@@ -53,9 +53,10 @@ public class TankController : MonoBehaviour
             ShootBullet();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R)) //change text
         {
             onMissile = !onMissile;
+            onRegular = !onRegular;
         }
     }
 

@@ -13,6 +13,7 @@ public class Boss : Enemy
     [SerializeField] int _dropAmount;
 
     [Header("Damage and Death")]
+    private int _health;
     public bool _gemHitAllowed = false;
     [SerializeField] public int attackDamage = 10;
     [SerializeField] ParticleSystem _deathParticles;
@@ -53,8 +54,6 @@ public class Boss : Enemy
         {
             LookAtPlayer();
         }
-
-        
 
     }
 

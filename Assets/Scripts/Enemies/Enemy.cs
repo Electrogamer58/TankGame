@@ -6,7 +6,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected int _damageAmount = 1;
-    [SerializeField] protected float _health = 10;
     [SerializeField] ParticleSystem _impactParticles;
     [SerializeField] AudioClip _impactSound;
     [SerializeField] protected AudioClip _DullSound;
@@ -45,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void PlayerImpact(Player player)
     {
-        player.DecreaseHealth(_damageAmount);
+        player.GetComponent<Health>().TakeDamage(_damageAmount);
     }
 
     protected void ImpactFeedback()
@@ -65,10 +64,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void DecreaseEnemyHealth(float amount)
-    {
-        _health -= amount;
-    }
+    
 
     public void Move()
     {

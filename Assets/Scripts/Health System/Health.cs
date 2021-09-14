@@ -8,6 +8,7 @@ public class Health : IDamageableInterface
     public int _currentHealth;
 
     public float _killDelay;
+    public int _heal;
 
     private void Awake()
     {

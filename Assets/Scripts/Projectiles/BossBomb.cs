@@ -27,7 +27,7 @@ public class BossBomb : ProjectileBase
                 if (!_player.isInvincible) //if vincible and hit, deal damage
                 {
 
-                    _player.DecreaseHealth(bulletDamage);
+                    _player.GetComponent<Health>().TakeDamage(bulletDamage);
                     ImpactFeedback(_impactSound);
                     //_player.GetComponent<Rigidbody>().AddExplosionForce(_damageAmount, _player.transform.position, 2);
                     Debug.Log("Bomb");

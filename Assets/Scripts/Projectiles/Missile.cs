@@ -20,7 +20,7 @@ public class Missile : ProjectileBase
     
     private void Update()
     {
-        if (_boss != null)
+        if (_boss != null && _target != null)
         {
             transform.LookAt(_boss.transform);
             _newPos = Vector3.MoveTowards(_rb.position, _target, moveSpeed);

@@ -7,7 +7,7 @@ public class IDamageableInterface : MonoBehaviour
     [Header("Basic Info and Feedback")]
     [SerializeField] Health _health;
     [SerializeField] ParticleSystem _impactParticles;
-    [SerializeField] AudioClip _impactSound;
+    [SerializeField] AudioClip _impactSound = null;
 
     [Header("Drops")]
     public bool _dropSomething = false;
@@ -26,7 +26,14 @@ public class IDamageableInterface : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         _health._currentHealth -= damage;
+        _health._currentHealth = Mathf.Clamp(_health._currentHealth, 0, _health._maxHealth);
     }
+
+    //public virtual void Heal(int health)
+    //{
+        //_health._currentHealth += health;
+
+    //}
 
     protected void DeathFeedback(AudioClip _feedback)
     {
@@ -45,7 +52,7 @@ public class IDamageableInterface : MonoBehaviour
         transform.position = new Vector3(transform.position.x, -100, transform.position.z);
     }
 
-    protected void Kill(float delay)
+    public void Kill(float delay)
     {
         DeathFeedback(_impactSound);
         

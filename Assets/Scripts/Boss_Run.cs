@@ -9,7 +9,9 @@ public class Boss_Run : StateMachineBehaviour
     [SerializeField] float _gemAttackRange = 10f;
     [SerializeField] float _bombRange = 15f;
 
-    Transform _player;
+    [SerializeField] Transform _player = null;
+
+    GameController _gc;
     Transform _upgrade;
     ViewRange _viewRange;
     Rigidbody _rb;
@@ -21,7 +23,13 @@ public class Boss_Run : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetFloat("bossSpeed", _moveSpeed);
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _gc = GameObject.Find("GameController").GetComponent<GameController>();
+
+        if (_gc._playerIsAlive)
+        {
+            _player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        
         _upgrade = GameObject.FindGameObjectWithTag("Rage").transform;
         _rb = animator.GetComponent<Rigidbody>();
         _boss = animator.GetComponent<Boss>();

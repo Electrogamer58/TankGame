@@ -7,6 +7,6 @@ public class Killer : Enemy
     protected override void PlayerImpact(Player player)
     {
         //base.PlayerImpact(player);
-        player.Kill();
+        player.GetComponent<Health>().Kill(0);
     }
 }
