@@ -35,7 +35,7 @@ public class Zombie : Enemy
         ImpactFeedback();
         player.GetComponent<Rigidbody>().AddExplosionForce(800f, gameObject.transform.position, 10f);
         this.gameObject.SetActive(false);
-        //Destroy(this.gameObject, 30f);
+        Destroy(this.gameObject);
     }
 
    

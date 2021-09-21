@@ -8,6 +8,7 @@ public class ProjectileBase : MonoBehaviour
     [SerializeField] GameObject _impactParticles;
     [SerializeField] protected AudioClip _impactSound;
     [SerializeField] protected Player _player;
+    [SerializeField] protected TankController _tank;
     public float moveSpeed = 20;
     public int bulletDamage;
 
@@ -19,6 +20,7 @@ public class ProjectileBase : MonoBehaviour
     protected virtual void Awake()
     {
         _player =  GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _tank = _player.GetComponent<TankController>();
         _rb = GetComponent<Rigidbody>();
 
     }
@@ -29,7 +31,10 @@ public class ProjectileBase : MonoBehaviour
         _rb.useGravity = false;
         //Destroy(gameObject, 10f); //destroy after 3 seconds
 
-        DelayHelper.DelayAction(this, DeactivateObject, 10f);
+        //DelayHelper.DelayAction(this, DeactivateObject, 10f);
+        Destroy(this.gameObject, 20f);
+
+        _rb.velocity = _tank.transform.forward * moveSpeed;
     }
 
     //protected void FixedUpdate()
@@ -40,11 +45,11 @@ public class ProjectileBase : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<IDamageableInterface>())
+        if (collision.gameObject.GetComponent<IDamageable>())
         {
             //play impact
             ImpactFeedback(_impactSound);
-            collision.gameObject.GetComponent<IDamageableInterface>().TakeDamage(bulletDamage);
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(bulletDamage);
             
             DelayHelper.DelayAction(this, DeactivateObject, 0.01f);
         }
@@ -58,12 +63,15 @@ public class ProjectileBase : MonoBehaviour
         if (_impactParticles != null)
         {
             _impactParticles = Instantiate(_impactParticles, transform.position, Quaternion.identity);
-            
+            Destroy(_impactParticles, 10f);
+
+
         }
         // audio. TODO: Consider object pooling - helps performance
         if (_impactSound != null)
         {
             AudioHelper.PlayClip2D(_feedback, 1f);
+            //Destroy(_impactSound, 10f);
         }
 
         transform.position = new Vector3(transform.position.x, -100, transform.position.z);

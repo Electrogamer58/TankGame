@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IDamageableInterface : MonoBehaviour
+public class IDamageable : MonoBehaviour
 {
     [Header("Basic Info and Feedback")]
     [SerializeField] Health _health;

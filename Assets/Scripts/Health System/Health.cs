@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : IDamageableInterface
+public class Health : IDamageable
 {
     public int _maxHealth;
     public int _currentHealth;

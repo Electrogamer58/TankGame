@@ -46,7 +46,7 @@ public class UI : MonoBehaviour
                 weaponDisplay.text = "R - Switch Weapon: Bullet";
             }
 
-            if (player.GetComponent<Health>()._currentHealth <= 0)
+            if (player.GetComponent<Health>()._currentHealth <= 0 || player == null)
             {
                 restartDisplay.SetActive(true);
             }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TankController : MonoBehaviour
 {
     [SerializeField] float _moveSpeed = .25f;
-    [SerializeField] float _turnSpeed = 2f;
+    [SerializeField] float _turnSpeed = 4f;
     [SerializeField] public float _recharge = 2f;
     [SerializeField] ParticleSystem _muzzleFlash;
     [SerializeField] AudioClip _muzzleSound;
@@ -88,18 +88,18 @@ public class TankController : MonoBehaviour
 
         if (!onMissile)
         {
-            _regularBullet.gameObject.SetActive(true);
-            _regularBullet = Instantiate(_regularBullet, _barrelEnd.position, Quaternion.identity);
+            //_regularBullet.gameObject.SetActive(true);
+            Instantiate(_regularBullet, _barrelEnd.position, Quaternion.identity);
             _rb.AddForce(-transform.forward * 350f);
-            _regularBullet.velocity = transform.forward * _regularBullet.GetComponent<ProjectileBase>().moveSpeed;
+            
         }
 
         if (onMissile)
         {
-            _missile.gameObject.SetActive(true);
-            _missile = Instantiate(_missile, _barrelEnd.position, Quaternion.identity);
+            //_missile.gameObject.SetActive(true);
+            Instantiate(_missile, _barrelEnd.position, Quaternion.identity);
             _rb.AddForce(-transform.forward * 450f);
-            _missile.velocity = transform.forward * (_regularBullet.GetComponent<ProjectileBase>().moveSpeed/2);
+            //_missile.velocity = transform.forward * (_regularBullet.GetComponent<ProjectileBase>().moveSpeed/2);
         }
         
     }

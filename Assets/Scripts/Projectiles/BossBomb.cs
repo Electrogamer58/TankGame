@@ -6,18 +6,21 @@ public class BossBomb : ProjectileBase
 {
     [SerializeField] AudioClip _dullSound;
     [SerializeField] GameObject _zombie; //zombie to spawn
+    [SerializeField] Boss _boss;
     //[SerializeField] Player _player;
-    [SerializeField] TankController _tank;
 
     protected override void Start()
     {
         _rb.useGravity = true;
+        _boss = FindObjectOfType<Boss>();
         DelayHelper.DelayAction(this, DeactivateObject, 10f);
+
+        _rb.velocity = _boss.transform.forward * moveSpeed;
     }
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<IDamageableInterface>())
+        if (collision.gameObject.GetComponent<IDamageable>())
         {
             if (collision.gameObject.tag == "Player")
             {
@@ -44,7 +47,9 @@ public class BossBomb : ProjectileBase
         {
             SpawnZombie();
             ImpactFeedback(_impactSound);
+            Destroy(this.gameObject, 10f);
             this.gameObject.SetActive(false);
+
         }
 
 
@@ -52,8 +57,8 @@ public class BossBomb : ProjectileBase
 
     private void SpawnZombie()
     {
-        _zombie.SetActive(true);
-        _zombie = Instantiate(_zombie, gameObject.transform.position, Quaternion.identity);
+        //_zombie.SetActive(true);
+        Instantiate(_zombie, gameObject.transform.position, Quaternion.identity);
         Debug.Log("Spawned a Zombie");
     }
 }

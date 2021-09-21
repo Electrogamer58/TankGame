@@ -15,11 +15,18 @@ public class Missile : ProjectileBase
 
 
         DelayHelper.DelayAction(this, FindBoss, 0.5f);
-         
+        
+
     }
     
     private void Update()
     {
+        if (_tank != null)
+        {
+            _rb.velocity = _tank.transform.forward * moveSpeed * 50;
+        }
+        
+
         if (_boss != null && _target != null)
         {
             transform.LookAt(_boss.transform);
@@ -33,7 +40,7 @@ public class Missile : ProjectileBase
     private void FindBoss()
     {
         _boss = FindObjectOfType<Boss>().GetComponent<Boss>();
-        _target = new Vector3(_boss.transform.position.x, 0.38f, _boss.transform.position.z);
+        _target = new Vector3(_boss.transform.position.x, _boss.transform.position.y, _boss.transform.position.z);
     }
 
     protected override void DeactivateObject()

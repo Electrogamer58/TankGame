@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using System;
 
 [RequireComponent(typeof(TankController))]
 public class Player : MonoBehaviour
 {
     //[SerializeField] int _maxHealth = 3;
     //int _currentHealth;
+    public event Action Damaged = delegate { };
 
     [SerializeField] GameController _gc;
     private int _currentTreasure;
@@ -25,36 +28,11 @@ public class Player : MonoBehaviour
         _gc._playerIsAlive = true;
     }
 
-    //private void Start()
-    //{
-    //_currentHealth = _maxHealth;
-    //}
-
-    //public void IncreaseHealth(int amount)
-    //{
-    //_currentHealth += amount;
-    //_currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-
-    //Debug.Log("Player's health: " + _currentHealth);
-    //}
-
-    //public void DecreaseHealth(int amount)
-    //{
-    //_currentHealth -= amount;
-    //Debug.Log("Player's health: " + _currentHealth);
-    //if (_currentHealth <= 0)
-    //{
-    //Kill();
-    //} 
-    //}
-
-    //public void Kill()
-    //{
-    //gameObject.SetActive(false);
-    //TODO
-    //Play Particles
-    //Play sounds
-    //}
+    public void Damage()
+    {
+        //Invoke the event appropriately
+        Damaged?.Invoke(); // null check 
+    }
 
     private void Update()
     {
@@ -62,6 +40,11 @@ public class Player : MonoBehaviour
         {
             _gc._playerIsAlive = false;
         }
+    }
+
+    protected void ImpactFeedback()
+    {
+        Debug.Log("Got Hit!");
     }
 
     public void IncreaseTreasure(int amount)

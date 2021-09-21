@@ -129,8 +129,8 @@ public class Boss : Enemy
         
             LookAtPlayer();
             Debug.Log("Spawn Bomb");
-            _bombRB.gameObject.SetActive(true);
-            _bombRB = Instantiate(_bombRB, _bombSource.position, Quaternion.identity);
+            //_bombRB.gameObject.SetActive(true);
+            Instantiate(_bombRB, _bombSource.position, Quaternion.identity);
             _bombRB.velocity = transform.forward * _bombRB.GetComponent<ProjectileBase>().moveSpeed;
             _rb.AddForce(-transform.forward * 500f);
             
