@@ -20,7 +20,7 @@ public class BossBomb : ProjectileBase
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<IDamageable>())
+        if (collision.gameObject.GetComponent<Health>())
         {
             if (collision.gameObject.tag == "Player")
             {

@@ -45,11 +45,11 @@ public class ProjectileBase : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<IDamageable>())
+        if (collision.gameObject.GetComponent<Health>())
         {
             //play impact
             ImpactFeedback(_impactSound);
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(bulletDamage);
+            collision.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);
             
             DelayHelper.DelayAction(this, DeactivateObject, 0.01f);
         }

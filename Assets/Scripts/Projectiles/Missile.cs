@@ -40,7 +40,10 @@ public class Missile : ProjectileBase
     private void FindBoss()
     {
         _boss = FindObjectOfType<Boss>().GetComponent<Boss>();
-        _target = new Vector3(_boss.transform.position.x, _boss.transform.position.y, _boss.transform.position.z);
+        if (_boss != null)
+        {
+            _target = new Vector3(_boss.transform.position.x, _boss.transform.position.y, _boss.transform.position.z);
+        }
     }
 
     protected override void DeactivateObject()

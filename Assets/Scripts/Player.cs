@@ -7,9 +7,7 @@ using System;
 [RequireComponent(typeof(TankController))]
 public class Player : MonoBehaviour
 {
-    //[SerializeField] int _maxHealth = 3;
-    //int _currentHealth;
-    public event Action Damaged = delegate { };
+    
 
     [SerializeField] GameController _gc;
     private int _currentTreasure;
@@ -28,11 +26,7 @@ public class Player : MonoBehaviour
         _gc._playerIsAlive = true;
     }
 
-    public void Damage()
-    {
-        //Invoke the event appropriately
-        Damaged?.Invoke(); // null check 
-    }
+    
 
     private void Update()
     {
