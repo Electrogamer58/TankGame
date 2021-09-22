@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TankController : MonoBehaviour
 {
+    
     [SerializeField] float _moveSpeed = .25f;
     [SerializeField] float _turnSpeed = 4f;
     [SerializeField] public float _recharge = 2f;
     [SerializeField] ParticleSystem _muzzleFlash;
     [SerializeField] AudioClip _muzzleSound;
+    [SerializeField] TrailRenderer _fastTrail;
 
     [Header("Bullets and Access")]
     [SerializeField] Rigidbody _regularBullet;
@@ -57,6 +60,15 @@ public class TankController : MonoBehaviour
         {
             onMissile = !onMissile;
             onRegular = !onRegular;
+        }
+
+        if (_moveSpeed > 0.25f && _fastTrail != null)
+        {
+            _fastTrail.emitting = true;
+        }
+        else if (_moveSpeed <= 0.25f && _fastTrail != null)
+        {
+            _fastTrail.emitting = false;
         }
     }
 

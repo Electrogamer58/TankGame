@@ -18,8 +18,14 @@ public class CameraShake : MonoBehaviour
 
     Vector3 originalPos;
 
+    private Player _player;
+    private Health _health;
+
     void Awake()
     {
+        _player = FindObjectOfType<Player>();
+        _health = _player.GetComponent<Health>();
+
         if (camTransform == null)
         {
             camTransform = GetComponent(typeof(Transform)) as Transform;
@@ -34,17 +40,20 @@ public class CameraShake : MonoBehaviour
 
     void Update()
     {
-        
-        if (shakeDuration > 0)
+        if (_camFollow.target != null || _health._currentHealth > 0)
         {
-            camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+            if (shakeDuration > 0)
+            {
+                camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 
-            shakeDuration -= Time.deltaTime * decreaseFactor;
+                shakeDuration -= Time.deltaTime * decreaseFactor;
+            }
+            else
+            {
+                shakeDuration = 0f;
+                camTransform.localPosition = _camFollow.smoothedPosition;
+            }
         }
-        else
-        {
-            shakeDuration = 0f;
-            camTransform.localPosition = _camFollow.smoothedPosition;
-        }
+        
     }
 }
