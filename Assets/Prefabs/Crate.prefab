@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3632898497121536050}
   m_Layer: 0
   m_Name: Crate
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,19 +108,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ab39a005d7f044cab64ca787896ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 1
+  _currentHealth: 0
+  _killDelay: 0
+  _heal: 0
   _health: {fileID: 8447655339415445552}
   _impactParticles: {fileID: 5327595321409481171, guid: d2cf5d9d5db4ae64b85f3f07fef2833a,
     type: 3}
   _impactSound: {fileID: 8300000, guid: 6d944e62bd1dc3b46973054a51bb0e5b, type: 3}
+  _isAlive: 1
   _dropSomething: 1
   _objectToDrop: {fileID: 6657074472004763248, guid: 7902551128927ac44bb3e6ce044a8c96,
     type: 3}
   _dropAmount: 1
   _allowDestroy: 0
-  _maxHealth: 1
-  _currentHealth: 0
-  _killDelay: 0
-  _heal: 0
 --- !u!54 &6679859108084804321
 Rigidbody:
   m_ObjectHideFlags: 0

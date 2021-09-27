@@ -53,6 +53,12 @@ public class ProjectileBase : MonoBehaviour
             
             DelayHelper.DelayAction(this, DeactivateObject, 0.01f);
         }
+
+        else if (!collision.gameObject.GetComponent<Health>())
+        {
+            ImpactFeedback(_impactSound);
+            DelayHelper.DelayAction(this, DeactivateObject, 0.01f);
+        }
         
 
     }

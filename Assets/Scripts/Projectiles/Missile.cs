@@ -13,9 +13,10 @@ public class Missile : ProjectileBase
     {
         base.Awake();
 
-
-        DelayHelper.DelayAction(this, FindBoss, 0.5f);
-        
+        if (GameController._bossIsAlive)
+        {
+            DelayHelper.DelayAction(this, FindBoss, 0.5f);
+        }
 
     }
     
@@ -27,9 +28,9 @@ public class Missile : ProjectileBase
         }
         
 
-        if (_boss != null && _target != null)
+        if (_boss != null && _target != null && GameController._bossIsAlive)
         {
-            transform.LookAt(_boss.transform);
+            transform.LookAt(_target);
             _newPos = Vector3.MoveTowards(_rb.position, _target, moveSpeed);
             _rb.MovePosition(_newPos);
             
@@ -43,12 +44,17 @@ public class Missile : ProjectileBase
         if (_boss != null)
         {
             _target = new Vector3(_boss.transform.position.x, _boss.transform.position.y, _boss.transform.position.z);
+
         }
     }
 
     protected override void DeactivateObject()
     {
         base.DeactivateObject();
-        _boss = null;
+        if (GameController._bossIsAlive)
+        {
+            _boss = null;
+        }
+            
     }
 }

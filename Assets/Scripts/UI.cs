@@ -38,7 +38,7 @@ public class UI : MonoBehaviour
 
             if (tank.onMissile)
             {
-                weaponDisplay.text = "R - Switch Weapon: Missile";
+                weaponDisplay.text = "R - Switch Weapon: Missiles: " + tank._missilesAmt;
             }
 
             if (tank.onRegular)

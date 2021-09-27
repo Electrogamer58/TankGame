@@ -11,7 +11,7 @@ public class Boss_Run : StateMachineBehaviour
 
     [SerializeField] Transform _player = null;
 
-    GameController _gc;
+    
     Transform _upgrade;
     ViewRange _viewRange;
     Rigidbody _rb;
@@ -23,9 +23,9 @@ public class Boss_Run : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetFloat("bossSpeed", _moveSpeed);
-        _gc = GameObject.Find("GameController").GetComponent<GameController>();
+        
 
-        if (_gc._playerIsAlive)
+        if (GameController._playerIsAlive)
         {
             _player = GameObject.FindGameObjectWithTag("Player").transform;
         }

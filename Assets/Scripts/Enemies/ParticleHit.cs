@@ -8,6 +8,7 @@ public class ParticleHit : MonoBehaviour
     [SerializeField] ParticleSystem _impactParticles;
     [SerializeField] AudioClip _impactSound;
     [SerializeField] AudioClip _dullSound;
+    [SerializeField] TrailRenderer _beamTrail;
     Boss _boss;
     Player _player;
     TankController _tank;
@@ -19,8 +20,13 @@ public class ParticleHit : MonoBehaviour
         _damageAmount = _boss.attackDamage;
     }
 
+    private void FixedUpdate()
+    {
+        _damageAmount = _boss.attackDamage;
+    }
+
     private void OnParticleCollision(GameObject other)
-    { 
+    {
         if (other.tag == "Player" && _boss._gemHitAllowed)
         {
             _player = other.GetComponent<Player>();
@@ -38,9 +44,16 @@ public class ParticleHit : MonoBehaviour
             {
                 ImpactFeedback(_dullSound);
             }
-            _boss._gemHitAllowed = false;    
+            _boss._gemHitAllowed = false;
         }
-        
+
+        if (other.tag == "Ground")
+        {
+            //Debug.Log("beamTrail made");
+            //TrailRenderer newBeamTrail = Instantiate(_beamTrail, transform.forward, Quaternion.identity);
+            //_beamTrail.emitting = true;
+            //Destroy(newBeamTrail.gameObject, 10f);
+        }
     }
 
     protected void ImpactFeedback(AudioClip sound)

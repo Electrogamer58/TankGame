@@ -11,14 +11,14 @@ public class InvincibilityPowerup : PowerUpBase
     [SerializeField] Renderer tankRen;
     [SerializeField] Renderer turretRen;
 
-    Material _originalMaterial;
+    [SerializeField] Material _originalMaterial;
 
     protected override void PowerUp(Player player)
     {
         tankRen = GameObject.Find("Tank/Art/Body").GetComponent<Renderer>();
         turretRen = GameObject.Find("Tank/Art/Turret").GetComponent<Renderer>();
 
-        _originalMaterial = tankRen.material;
+        //_originalMaterial = tankRen.material;
 
         tankRen.material = blue;
         turretRen.material = blue;

@@ -8,7 +8,7 @@ public class TankController : MonoBehaviour
     
     [SerializeField] float _moveSpeed = .25f;
     [SerializeField] float _turnSpeed = 4f;
-    [SerializeField] public float _recharge = 2f;
+    [SerializeField] public float _recharge = 1f;
     [SerializeField] ParticleSystem _muzzleFlash;
     [SerializeField] AudioClip _muzzleSound;
     [SerializeField] TrailRenderer _fastTrail;
@@ -23,6 +23,7 @@ public class TankController : MonoBehaviour
     private Transform _barrelEnd;
     private bool _shotAllowed = true;
     public float _ogRecharge;
+    public int _missilesAmt = 4;
 
     public float MaxSpeed
     {
@@ -37,7 +38,6 @@ public class TankController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _barrelEnd = GameObject.Find("BarrelEnd").transform;
         _ogRecharge = _recharge;
-
         onMissile = !onRegular;
     }
 
@@ -45,6 +45,8 @@ public class TankController : MonoBehaviour
     {
         MoveTank();
         TurnTank();
+        
+
     }
 
     private void Update()
@@ -100,17 +102,20 @@ public class TankController : MonoBehaviour
 
         if (!onMissile)
         {
+            //_recharge = 0.5f;
             //_regularBullet.gameObject.SetActive(true);
             Instantiate(_regularBullet, _barrelEnd.position, Quaternion.identity);
-            _rb.AddForce(-transform.forward * 350f);
+            _rb.AddForce(-transform.forward * 150f);
             
         }
 
-        if (onMissile)
+        if (onMissile && _missilesAmt > 0)
         {
+            //_recharge = 1.5f;
             //_missile.gameObject.SetActive(true);
             Instantiate(_missile, _barrelEnd.position, Quaternion.identity);
-            _rb.AddForce(-transform.forward * 450f);
+            _rb.AddForce(-transform.forward * 250f);
+            _missilesAmt -= 1;
             //_missile.velocity = transform.forward * (_regularBullet.GetComponent<ProjectileBase>().moveSpeed/2);
         }
         

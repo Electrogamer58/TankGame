@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     {
         _tankController = GetComponent<TankController>();
         _myHealth = GetComponent<Health>();
-        _gc._playerIsAlive = true;
+        GameController._playerIsAlive = true;
     }
 
     
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     {
         if (_myHealth._currentHealth <= 0)
         {
-            _gc._playerIsAlive = false;
+            GameController._playerIsAlive = false;
         }
     }
 

@@ -21,8 +21,16 @@ public class Spawner : MonoBehaviour
         spawnPoint.x = x;
         spawnPoint.z = z;
 
-        minX = -maxX;
-        minZ = -maxZ;
+        if (minX == 0)
+        {
+            minX = -maxX;
+        }
+
+        if (minZ == 0)
+        {
+            minZ = -maxZ;
+        }
+        
     }
 
     private void Update()
@@ -33,15 +41,18 @@ public class Spawner : MonoBehaviour
 
     void Spawn()
     {
-        if (timer >= timeTilNextSpawn)
+        if (GameController._bossIsAlive)
         {
-            x = Random.Range(minX, maxX);
-            z = Random.Range(minZ, maxZ);
-            spawnPoint.x = x;
-            spawnPoint.z = z;
-            Instantiate(spawnObject, spawnPoint, Quaternion.identity);
-            Debug.Log("Spawn Object");
-            timer = 0;
+            if (timer >= timeTilNextSpawn)
+            {
+                x = Random.Range(minX, maxX);
+                z = Random.Range(minZ, maxZ);
+                spawnPoint.x = x;
+                spawnPoint.z = z;
+                Instantiate(spawnObject, spawnPoint, Quaternion.identity);
+                Debug.Log("Spawn Object");
+                timer = 0;
+            }
         }
     }
 }

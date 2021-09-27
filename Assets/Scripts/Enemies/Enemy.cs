@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
         Move();
     }
 
+    
+
     private void OnCollisionEnter(Collision other)
     {
         Player player = other.gameObject.GetComponent<Player>();

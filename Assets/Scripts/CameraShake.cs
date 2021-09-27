@@ -40,7 +40,7 @@ public class CameraShake : MonoBehaviour
 
     void Update()
     {
-        if (_camFollow.target != null || _health._currentHealth > 0)
+        if (GameController._playerIsAlive && _health._currentHealth > 0 && GameController._bossIsAlive)
         {
             if (shakeDuration > 0)
             {

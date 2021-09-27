@@ -132,3 +132,4 @@ MonoBehaviour:
   blue: {fileID: 2100000, guid: 553e02ced585c704a9bfe4a56005c4b5, type: 2}
   tankRen: {fileID: 0}
   turretRen: {fileID: 0}
+  _originalMaterial: {fileID: 2100000, guid: b1310ba89d583b1449ae1c0bf6e5b4f0, type: 2}

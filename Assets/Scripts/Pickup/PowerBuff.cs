@@ -12,10 +12,19 @@ public class PowerBuff : PowerUpBase
 
     //[SerializeField] GameObject core;
     [SerializeField] Renderer crystalRen;
+    [SerializeField] Renderer crystalTopRen;
+    [SerializeField] Renderer crystalBotRen;
     //[SerializeField] ParticleSystem crystalBeam;
 
-    Material _originalMaterial;
-    Material _ogCrystalMaterial;
+    [SerializeField] Material _originalMaterial;
+    [SerializeField] Material _ogCrystalMaterial;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        crystalTopRen = GameObject.Find("CoreGem1").GetComponent<Renderer>();
+        crystalBotRen = GameObject.Find("CoreGem2").GetComponent<Renderer>();
+    }
 
     protected override void PowerUp(Player player)
     {
@@ -23,7 +32,7 @@ public class PowerBuff : PowerUpBase
         turretRen = GameObject.Find("Tank/Art/Turret").GetComponent<Renderer>();
         TankController _tank = tankRen.GetComponentInParent<TankController>();
 
-        _originalMaterial = tankRen.material;
+       // _originalMaterial = tankRen.material;
 
         tankRen.material = _rage;
         turretRen.material = _rage;
@@ -50,7 +59,7 @@ public class PowerBuff : PowerUpBase
         crystalRen = GameObject.Find("Boss/Art/Core").GetComponent<Renderer>();
         //core = GameObject.Find("Boss/Art/Core");
 
-        _ogCrystalMaterial = crystalRen.material;
+        //_ogCrystalMaterial = crystalRen.material;
 
         //crystalBeam = core.GetComponentInChildren<ParticleSystem>();
         //crystalBeam.startColor = new Color(1, 0, 0, 1);
@@ -59,7 +68,9 @@ public class PowerBuff : PowerUpBase
         boss.hasPowerup = true;
         boss.moveRoll = 1;
 
+        crystalTopRen.material = _rage;
         crystalRen.material = _rage;
+        crystalBotRen.material = _rage;
 
 
     }
@@ -68,8 +79,10 @@ public class PowerBuff : PowerUpBase
     {
         //core = GameObject.Find("Boss/Art/Core");
 
+        crystalTopRen.material = _ogCrystalMaterial;
         crystalRen.material = _ogCrystalMaterial;
-    
+        crystalBotRen.material = _ogCrystalMaterial;
+
         //crystalBeam = core.GetComponentInChildren<ParticleSystem>();
         //crystalBeam.startColor = new Color(0, 1, 1, 1);
 

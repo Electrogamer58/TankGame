@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7243530358739456158}
   - component: {fileID: 3540938522049349789}
   - component: {fileID: 2244299260254948672}
+  - component: {fileID: 212076356710525010}
   m_Layer: 0
   m_Name: Rage
   m_TagString: Rage
@@ -29,8 +30,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7243530358739456144}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.681815, y: -0.32817096, z: 7.395562}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.681815, y: -0.059, z: 7.395562}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -134,6 +135,10 @@ MonoBehaviour:
   tankRen: {fileID: 0}
   turretRen: {fileID: 0}
   crystalRen: {fileID: 0}
+  crystalTopRen: {fileID: 0}
+  crystalBotRen: {fileID: 0}
+  _originalMaterial: {fileID: 2100000, guid: b1310ba89d583b1449ae1c0bf6e5b4f0, type: 2}
+  _ogCrystalMaterial: {fileID: 2100000, guid: 553e02ced585c704a9bfe4a56005c4b5, type: 2}
 --- !u!114 &2244299260254948672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,3 +594,22 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!95 &212076356710525010
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7243530358739456144}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 818d8d821eb77524290ede7f319e3a01, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

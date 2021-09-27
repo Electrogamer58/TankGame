@@ -144,16 +144,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ab39a005d7f044cab64ca787896ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 618706088}
-  _impactParticles: {fileID: 5414885691203671606, guid: ebaaf9d80144d9c4d9db1a6768cc4f2b,
-    type: 3}
-  _impactSound: {fileID: 8300000, guid: ccfce8546283792449243ecbe9a6ffed, type: 3}
-  _dropSomething: 1
-  _objectToDrop: {fileID: 4899237492771995553, guid: 86cab3ad20987ff4881977df4e87bf77,
-    type: 3}
-  _dropAmount: 1
-  _allowDestroy: 1
   _maxHealth: 2
   _currentHealth: 0
   _killDelay: 0
   _heal: 0
+  _health: {fileID: 618706088}
+  _impactParticles: {fileID: 5414885691203671606, guid: ebaaf9d80144d9c4d9db1a6768cc4f2b,
+    type: 3}
+  _impactSound: {fileID: 8300000, guid: ccfce8546283792449243ecbe9a6ffed, type: 3}
+  _isAlive: 1
+  _dropSomething: 1
+  _dropsMultipleThings: 1
+  _objectToDrop: {fileID: 4899237492771995553, guid: 86cab3ad20987ff4881977df4e87bf77,
+    type: 3}
+  _objectToDrop2: {fileID: 4224852143928300821, guid: b2c5448e9f87b0341a112495733323ce,
+    type: 3}
+  _objectToDrop3: {fileID: 7243530358739456144, guid: 44d089bab2afe1043bb96ba4958b30aa,
+    type: 3}
+  _objectToDrop4: {fileID: 1180922865756819473, guid: 56bb5f5f46877424f956ebb6655f6cfd,
+    type: 3}
+  _dropAmount: 1
+  _allowDestroy: 1

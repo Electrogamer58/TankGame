@@ -26,7 +26,7 @@ public abstract class PowerUpBase : MonoBehaviour
 
     protected Rigidbody _rb;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
     }

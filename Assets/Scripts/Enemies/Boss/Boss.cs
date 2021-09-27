@@ -7,18 +7,19 @@ public class Boss : Enemy
     [Header("Detect Player")] 
     [SerializeField] Transform _playerTransform;
     [SerializeField] ViewRange _viewRange;
+    [SerializeField] LookAtPlayer _lookPlayer;
 
     [Header("Drops")]
     [SerializeField] public GameObject _drop;
     [SerializeField] int _dropAmount;
 
     [Header("Damage and Death")]
-    private int _health;
-    public bool _gemHitAllowed = false;
     [SerializeField] public int attackDamage = 10;
     [SerializeField] ParticleSystem _deathParticles;
     [SerializeField] AudioClip _deathSound;
-
+    [SerializeField] Health _myHealth;
+    [SerializeField] GameObject _angerRage;
+ 
     [Header("Bomb Options")]
     [SerializeField] GameObject _bomb;
     [SerializeField] Rigidbody _bombRB;
@@ -29,6 +30,8 @@ public class Boss : Enemy
     [SerializeField] Transform _rageUpgrade;
 
     private float nextActionTime = 0.0f;
+    public bool _gemHitAllowed = false;
+    private int _health;
     public float period = 5f;
 
     public bool hasPowerup = false;
@@ -44,23 +47,29 @@ public class Boss : Enemy
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _rageUpgrade = GameObject.FindGameObjectWithTag("Rage").transform;
         _health = GetComponent<Health>()._currentHealth;
+        
+    }
+
+    private void OnEnable()
+    {
+        _myHealth.Halved += OnHalved;
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
 
-        if (_playerTransform != null)
-        {
-            LookAtPlayer();
-        }
+        //if (_playerTransform != null)
+        //{
+            //LookAtPlayer();
+        //}
 
     }
 
     private void Update()
     {
         
-        DropIfDead();
+        //DropIfDead();
         if (Time.time > nextActionTime)
         {
             DelayHelper.DelayAction(this, RollForMovement, 1);
@@ -78,7 +87,7 @@ public class Boss : Enemy
     {
         if (_viewRange.seePlayer == true)
         {
-
+            _lookPlayer.ChangeBool(true);
             transform.LookAt(_playerTransform);
             
         }
@@ -86,38 +95,9 @@ public class Boss : Enemy
 
     public void LookAtPowerup()
     {
+        _lookPlayer.ChangeBool(false);
         transform.LookAt(_rageUpgrade);
     }
-
-    private void DropIfDead()
-    {
-        if (_health <= 0)
-        {
-            while(_dropAmount > 0)
-            {
-                Transform _tf = gameObject.transform;
-                Vector3 _v3 = _tf.position + new Vector3(Random.Range(-2,2), 0, Random.Range(-2,2));
-                _drop = Instantiate(_drop, _v3, Quaternion.identity);
-                _dropAmount -= 1;
-
-            }  
-        }      
-    }
-
-    //protected void ExplosionFeedback()
-    //{
-        
-        //if (_deathParticles != null)
-        //{
-            //_deathParticles = Instantiate(_deathParticles, transform.position, Quaternion.identity);
-            
-        //}
-        
-        //if (_deathSound != null)
-        //{
-            //AudioHelper.PlayClip2D(_deathSound, 1f);
-        //}
-    //}
 
     public void RollForMovement()
     {
@@ -126,14 +106,56 @@ public class Boss : Enemy
 
     public void ThrowBomb()
     {
-        
-            LookAtPlayer();
-            Debug.Log("Spawn Bomb");
-            //_bombRB.gameObject.SetActive(true);
-            Instantiate(_bombRB, _bombSource.position, Quaternion.identity);
-            _bombRB.velocity = transform.forward * _bombRB.GetComponent<ProjectileBase>().moveSpeed;
-            _rb.AddForce(-transform.forward * 500f);
-            
-        
+
+        LookAtPlayer();
+        Debug.Log("Spawn Bomb");
+        //_bombRB.gameObject.SetActive(true);
+        Instantiate(_bombRB, _bombSource.position, Quaternion.identity);
+        _bombRB.velocity = transform.forward * _bombRB.GetComponent<ProjectileBase>().moveSpeed;
+        _rb.AddForce(-transform.forward * 500f);
+
+
     }
+
+    private void OnDisable()
+    {
+        _myHealth.Halved -= OnHalved;
+    }
+
+    private void OnHalved()
+    {
+        _angerRage.SetActive(true);
+    }
+
+    //private void DropIfDead()
+    //{
+    //if (_health <= 0)
+    //{
+    //while(_dropAmount > 0)
+    //{
+    //Transform _tf = gameObject.transform;
+    //Vector3 _v3 = _tf.position + new Vector3(Random.Range(-2,2), 0, Random.Range(-2,2));
+    //_drop = Instantiate(_drop, _v3, Quaternion.identity);
+    //_dropAmount -= 1;
+
+    //}  
+    //}      
+    //}
+
+    //protected void ExplosionFeedback()
+    //{
+
+    //if (_deathParticles != null)
+    //{
+    //_deathParticles = Instantiate(_deathParticles, transform.position, Quaternion.identity);
+
+    //}
+
+    //if (_deathSound != null)
+    //{
+    //AudioHelper.PlayClip2D(_deathSound, 1f);
+    //}
+    //}
+
+
 }
