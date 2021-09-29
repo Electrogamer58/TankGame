@@ -29,7 +29,7 @@ public class Boss_Look : StateMachineBehaviour
 
         }
 
-        if (_boss.moveRoll == 2 && _viewRange.seePlayer == false && _boss.hasPowerup == false)
+        if (_boss.moveRoll == 2  && _boss.hasPowerup == false)
         {
             Debug.Log("Sees Powerup");
             //_boss.LookAtPowerup();
@@ -38,7 +38,7 @@ public class Boss_Look : StateMachineBehaviour
                 Vector3 _target = new Vector3(_upgrade.position.x, 0.38f, _upgrade.position.z);
                 Vector3 _newPos = Vector3.MoveTowards(_rb.position, _target, _moveSpeed);
 
-
+                _boss.transform.LookAt(_target);
                 _rb.MovePosition(_newPos);
                 
 

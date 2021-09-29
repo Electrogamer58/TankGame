@@ -33,7 +33,7 @@ public class Boss : Enemy
     private float nextActionTime = 0.0f;
     public bool _gemHitAllowed = false;
     private int _health;
-    public float period = 5f;
+    public float period = 1f;
 
     public bool hasPowerup = false;
     public int moveRoll = 1;
@@ -76,7 +76,7 @@ public class Boss : Enemy
         //DropIfDead();
         if (Time.time > nextActionTime)
         {
-            DelayHelper.DelayAction(this, RollForMovement, 1);
+            DelayHelper.DelayAction(this, RollForMovement, 0.5f);
             nextActionTime += period;
             // execute block of code here
         }

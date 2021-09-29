@@ -57,21 +57,16 @@ public class PowerBuff : PowerUpBase
     protected override void BossPowerUp(Boss boss)
     {
         crystalRen = GameObject.Find("Boss/Art/Core").GetComponent<Renderer>();
-        //core = GameObject.Find("Boss/Art/Core");
 
-        //_ogCrystalMaterial = crystalRen.material;
-
-        //crystalBeam = core.GetComponentInChildren<ParticleSystem>();
-        //crystalBeam.startColor = new Color(1, 0, 0, 1);
-
+        //increase attack damage
         boss.attackDamage *= 3;
         boss.hasPowerup = true;
-        boss.moveRoll = 1;
+        boss.moveRoll = 1; //force attack player!
 
+        //visual feedback
         crystalTopRen.material = _rage;
         crystalRen.material = _rage;
         crystalBotRen.material = _rage;
-
 
     }
 

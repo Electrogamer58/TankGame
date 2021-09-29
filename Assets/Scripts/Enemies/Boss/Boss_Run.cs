@@ -55,63 +55,54 @@ public class Boss_Run : StateMachineBehaviour
     {
         if (_boss.moveRoll == 1 || _boss.hasPowerup == true)
         {
-            //Debug.Log("Rolled a 1");
             _boss.LookAtPlayer();
-                    if (_player != null)
-                    {
-                        
 
-                        
-
-                        if (_viewRange.seePlayer == false)
+                    if (_player != null) //has player 
+                    {      
+                        if (_viewRange.seePlayer == false) //if doesnt see player
                         {
-                            animator.SetBool("seesPlayer", false);
+                            animator.SetBool("seesPlayer", false); //dont do below
                         }
 
-
-                        if (_viewRange.seePlayer == true && animator.GetBool("seesPlayer") == true)
+                        if (_viewRange.seePlayer == true && animator.GetBool("seesPlayer") == true) //if sees player, move towards him
                         {
                             Vector3 _target = new Vector3(_player.position.x, 0.38f, _player.position.z);
                             Vector3 _newPos = Vector3.MoveTowards(_rb.position, _target, _moveSpeed);
                             _rb.MovePosition(_newPos);
-
                         }
-
-                        if (Vector3.Distance(_player.position, _rb.position) <= _attackRange)
+                        if (Vector3.Distance(_player.position, _rb.position) <= _attackRange) //if within range, attack
                         {
-                            animator.SetTrigger("Attack");
+                            animator.SetTrigger("Attack");                   
                         }
-
-                        else if (Vector3.Distance(_player.position, _rb.position) > _attackRange && _throwOrGem == 1)
+                        else if (Vector3.Distance(_player.position, _rb.position) > _attackRange) //if outside of attack range... 
                         {
-                            if (Vector3.Distance(_player.position, _rb.position) <= _gemAttackRange)
+                            if (Vector3.Distance(_player.position, _rb.position) <= _gemAttackRange) //but within beam attack range
                             {
-                                animator.SetBool("seesPlayer", false);
-                                animator.SetTrigger("Special Attack");
-                                //animator.SetBool("seesPlayer", true);
+                                animator.SetBool("seesPlayer", false); //set to stop looking at player
+                                
+                                if (!animator.GetBool("isHalved")) //if health is not halved yet
+                                 {
+                                    
+                                    animator.SetTrigger("ThrowBomb"); //throw a bomb instead
+
+                                 } else if (animator.GetBool("isHalved"))
+
+                                    animator.SetTrigger("Special Attack"); //try and special attack
+
                             }
                         }
 
-                        else if (Vector3.Distance(_player.position, _rb.position) > _gemAttackRange && _throwOrGem == 2)
+                        else if (Vector3.Distance(_player.position, _rb.position) > _gemAttackRange) //if out of range, throw bomb
                         {
-                            
-                                //if (Vector3.Distance(_player.position, _rb.position) <= _bombRange)
-                                //{
                                     animator.SetBool("seesPlayer", false);
                                     Debug.Log("Within Bomb Range");
                                     animator.SetTrigger("ThrowBomb");
-                                    //_boss.ThrowBomb();
-                                    //animator.SetBool("seesPlayer", true);
-                                //}
-
-                            
                         }
                     }
         }
         else if (_boss.moveRoll == 2 && _boss.hasPowerup == false)
         {
-            //Debug.Log("Rolled a 2");
-            //_boss.LookAtPowerup();
+    
             if (_upgrade != null)
             {
                 Vector3 _target = new Vector3(_upgrade.position.x, 0.38f, _upgrade.position.z);
