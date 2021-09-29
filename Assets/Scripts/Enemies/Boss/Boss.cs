@@ -19,8 +19,9 @@ public class Boss : Enemy
     [SerializeField] AudioClip _deathSound;
     [SerializeField] Health _myHealth;
     [SerializeField] GameObject _angerRage;
- 
+
     [Header("Bomb Options")]
+    [SerializeField] Animator _anim;
     [SerializeField] GameObject _bomb;
     [SerializeField] Rigidbody _bombRB;
     [SerializeField] Transform _bombSource;
@@ -36,6 +37,7 @@ public class Boss : Enemy
 
     public bool hasPowerup = false;
     public int moveRoll = 1;
+    public bool isHalved = false;
 
 
 
@@ -47,6 +49,8 @@ public class Boss : Enemy
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _rageUpgrade = GameObject.FindGameObjectWithTag("Rage").transform;
         _health = GetComponent<Health>()._currentHealth;
+        _anim = GetComponent<Animator>();
+
         
     }
 
@@ -125,6 +129,8 @@ public class Boss : Enemy
     private void OnHalved()
     {
         _angerRage.SetActive(true);
+        _anim.SetBool("isHalved", true);
+        isHalved = true;
     }
 
     //private void DropIfDead()

@@ -118,8 +118,14 @@ MonoBehaviour:
   _impactSound: {fileID: 8300000, guid: 6d944e62bd1dc3b46973054a51bb0e5b, type: 3}
   _isAlive: 1
   _dropSomething: 1
+  _dropsMultipleThings: 1
   _objectToDrop: {fileID: 6657074472004763248, guid: 7902551128927ac44bb3e6ce044a8c96,
     type: 3}
+  _objectToDrop2: {fileID: 2364412492594748074, guid: 3578af95712c99647a2ece2d6876be69,
+    type: 3}
+  _objectToDrop3: {fileID: 5683650189112269194, guid: be8d2743b2768dc4dbe9d76a59725640,
+    type: 3}
+  _objectToDrop4: {fileID: 0}
   _dropAmount: 1
   _allowDestroy: 0
 --- !u!54 &6679859108084804321
